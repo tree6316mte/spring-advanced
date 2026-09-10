@@ -110,7 +110,9 @@ public class GameService {
                     game.getCurrentHp(),
                     game.getCurrentFloor(),
                     game.getPhase(),
-                    game.getStatus()
+                    game.getStatus(),
+                    game.getCreatedAt(),
+                    game.getModifiedAt()
             ));
         }
 
