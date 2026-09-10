@@ -4,6 +4,7 @@ import com.gamebasic.game.entity.GamePhase;
 import com.gamebasic.game.entity.GameStatus;
 import com.gamebasic.runcard.dto.CardResponse;
 import com.gamebasic.runcard.dto.RunCardRequest;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.List;
@@ -11,13 +12,13 @@ import java.util.List;
 @Getter
 public class RankingResponse {
     public final String season;
-    public final int totalRecords;
+    public final long totalRecords;
     public final int excludedCount;
     public final List<Entry> entries;
 
     public RankingResponse(
             String season,
-            int totalRecords,
+            long totalRecords,
             int excludedCount,
             List<Entry>entries
     ) {
@@ -27,6 +28,8 @@ public class RankingResponse {
         this.entries = entries;
     }
 
+    @Getter
+    @AllArgsConstructor
     public static class Entry {
         private int rank;
         private String playerName;
@@ -34,6 +37,5 @@ public class RankingResponse {
         private int remainingHp;
         private int bossTurns;
         private int deckSize;
-
     }
 }

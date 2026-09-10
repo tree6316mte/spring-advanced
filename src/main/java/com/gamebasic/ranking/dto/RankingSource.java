@@ -59,7 +59,7 @@ public class RankingSource {
             private String seed;
             private GameStatus status;
             private int clearedFloor;
-            private long durationSeconds;
+            private int durationSeconds;
             private int finalHp;
             private List<Floor> floors;
 
