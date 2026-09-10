@@ -6,6 +6,7 @@ import com.gamebasic.game.dto.*;
 import com.gamebasic.game.entity.Game;
 import com.gamebasic.game.repository.GameRepository;
 import com.gamebasic.runcard.dto.CardResponse;
+import com.gamebasic.runcard.dto.DeckCount;
 import com.gamebasic.runcard.dto.RunCardRequest;
 import com.gamebasic.runcard.entity.RunCard;
 import com.gamebasic.runcard.repository.RunCardRepository;
@@ -101,6 +102,7 @@ public class GameService {
      @Transactional(readOnly = true)
      public List<GameSummaryResponse> getGames() {
         List<Game> games = gameRepository.findAllByOrderByIdDesc();
+        List<DeckCount> counts = runCardRepository.countByGames(games);
 
         List<GameSummaryResponse> responseList = new ArrayList<>();
         for(Game game : games){
@@ -112,7 +114,8 @@ public class GameService {
                     game.getPhase(),
                     game.getStatus(),
                     game.getCreatedAt(),
-                    game.getModifiedAt()
+                    game.getModifiedAt(),
+                    counts.stream().filter(deck -> deck.getGameId().equals(game.getId())).findFirst().map(deck -> (int) deck.getCount()).orElse(0)
             ));
         }
 
